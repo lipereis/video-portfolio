@@ -139,6 +139,15 @@ document.addEventListener('DOMContentLoaded', () => {
       title: 'Clipe Incertezas (2024)',
       url: 'https://www.youtube.com/embed/zlg6i-vp2tU',
     },
+    {
+      title: 'Logo com Partículas (2025)',
+      url: 'https://player.vimeo.com/video/1144507432',
+    },
+
+    {
+      title: 'Mensagem 3D (2025)',
+      url: 'https://player.vimeo.com/video/1144509630',
+    },
   ];
 
   const gallery = document.getElementById('video-gallery');
