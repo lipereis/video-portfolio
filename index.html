@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Felipe Reis - Videomaker Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;600;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+
+<body>
+  <div id="cursor" aria-hidden="true">
+    <span class="corner tl"></span><span class="corner tr"></span>
+    <span class="corner bl"></span><span class="corner br"></span>
+  </div>
+
+  <header class="top">
+    <div class="container top-row">
+      <div class="brand">
+        <img src="./img/reis_logo.png" alt="Felipe Reis Logo" class="logo" />
+        <span>Felipe Reis</span>
+      </div>
+
+      <nav>
+        <ul>
+          <li><a href="#about" id="nav-about">Sobre</a></li>
+          <li><a href="#portfolio" id="nav-portfolio">Portfólio</a></li>
+          <li><a href="#roteiros" id="nav-roteiros">Roteiros</a></li>
+          <li><a href="#design" id="nav-design">Design Gráfico</a></li>
+          <li><a href="#skills" id="nav-skills">Habilidades</a></li>
+          <li><a href="#experience" id="nav-experience">Experiência</a></li>
+          <li><a href="#contact" id="nav-contact">Contato</a></li>
+        </ul>
+      </nav>
+
+      <div class="top-right">
+        <span class="timecode" id="tc">00:00:00:00</span>
+        <button class="theme-toggle" id="themeToggle" aria-pressed="false">Modo Claro</button>
+        <div class="language-selector">
+          <select id="language-select" onchange="changeLanguage()">
+            <option value="pt">PT</option>
+            <option value="en">EN</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="filmrule"></div>
+
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Rolo 01 · Reel Selecionado</p>
+      <h1 class="hero-title">Felipe<br>Reis</h1>
+      <div class="role-tags">
+        <span class="tag v">Video Editor</span>
+        <span class="tag v">Filmmaker</span>
+        <span class="tag a">Screenwriter</span>
+      </div>
+      <div class="cta-row">
+        <a class="btn solid" href="#portfolio" id="cta-portfolio">Ver Portfólio</a>
+        <a class="btn outline" href="#roteiros" id="cta-roteiros">Ler Roteiros</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="filmrule"></div>
+
+  <section id="about" class="slate reveal">
+    <div class="container">
+      <div class="slate-header">
+        <div class="slate-stripes"></div>
+        <h2 class="slate-label"><span class="dim">Slate 01 ·</span> <span id="about-title">Sobre Mim</span></h2>
+      </div>
+      <div class="slate-body">
+        <p id="about-objective"><strong>Resumo Profissional:</strong> Profissional com 5 anos de experiência no mercado audiovisual, com atuação nas áreas de edição de vídeo, produção audiovisual e som direto.</p>
+        <p id="about-education"><strong>Formação Acadêmica:</strong> Comunicação Social – Pontifícia Universidade Católica do Rio de Janeiro (PUC-Rio), formado em Junho/2024.</p>
+        <p id="about-languages"><strong>Idiomas:</strong><br>• Inglês: Avançado<br>• Espanhol: Avançado</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="filmrule"></div>
+
+  <section id="portfolio" class="track">
+    <div class="container">
+      <div class="track-header reveal">
+        <h2 class="track-title"><span class="track-chip v">V1</span> <span id="portfolio-title">Portfólio</span></h2>
+      </div>
+
+      <!-- SUBTÓPICO FILMES -->
+      <h3 class="portfolio-subtitle" id="films-title">Filmes</h3>
+      <div class="video-gallery" id="video-gallery"></div>
+
+      <!-- SUBTÓPICO GAMEPLAYS -->
+      <h3 class="portfolio-subtitle" id="gameplay-title">Gameplays</h3>
+      <div class="video-gallery" id="gameplay-gallery"></div>
+
+      <!-- SUBTÓPICO VÍDEOS VERTICAIS -->
+      <h3 class="portfolio-subtitle" id="vertical-title">Vídeos Verticais</h3>
+      <div class="video-gallery vertical-gallery" id="vertical-gallery"></div>
+    </div>
+  </section>
+
+  <div class="filmrule"></div>
+
+  <!-- SEÇÃO DE ROTEIROS -->
+  <section id="roteiros" class="track">
+    <div class="container">
+      <div class="track-header reveal">
+        <h2 class="track-title"><span class="track-chip a">A1</span> <span id="roteiros-title">Roteiros</span></h2>
+      </div>
+
+      <!-- MODELO A: ROTEIRO SEMIFINALISTA -->
+      <h3 class="portfolio-subtitle" id="semifinalist-title">Roteiro Semifinalista</h3>
+      <div class="screenplay-gallery">
+        <article class="screenplay-card featured">
+          <span class="award-badge">Semifinalista · Student Filmmaker Spotlight</span>
+          <h4 class="screenplay-title">Líban — A Água Que Cura</h4>
+          <div class="screenplay-meta">
+            <span class="meta-tag genre">Drama</span>
+            <span class="meta-tag format">Curta-metragem</span>
+          </div>
+          <p class="screenplay-logline"><strong>Logline:</strong> Para vencer o preconceito e curar as cicatrizes de um naufrágio devastador, um jovem refugiado somali precisa enfrentar seu maior medo e transformar a água traumática de seu passado em sua maior força na piscina.</p>
+        </article>
+      </div>
+
+      <!-- MODELO B: OUTROS ROTEIROS DO PORTFÓLIO -->
+      <h3 class="portfolio-subtitle" id="other-screenplays-title">Outros Roteiros</h3>
+      <div class="screenplay-gallery standard">
+        <article class="screenplay-card">
+          <span class="status-badge in-development">Em Desenvolvimento</span>
+          <h4 class="screenplay-title">O Carregador de Memórias</h4>
+          <div class="screenplay-meta">
+            <span class="meta-tag genre">Drama</span>
+            <span class="meta-tag format">Longa-metragem</span>
+          </div>
+          <p class="screenplay-logline"><strong>Logline:</strong> Para superar o colapso de sua carreira, um ex-engenheiro reconecta-se com seu próprio futuro através das cartas esquecidas de um homem que morreu sozinho, transformando o luto alheio em sua própria redenção literária.</p>
+        </article>
+
+        <article class="screenplay-card">
+          <span class="status-badge in-development">Em Desenvolvimento</span>
+          <h4 class="screenplay-title">A Geração Que Assiste</h4>
+          <div class="screenplay-meta">
+            <span class="meta-tag genre">Documentário</span>
+            <span class="meta-tag format">Longa-metragem</span>
+          </div>
+          <p class="screenplay-logline"><strong>Logline:</strong> Em uma era onde a vida é mais assistida do que vivida através das telas, um documentário investiga a crise de autoestima e o isolamento dos homens contemporâneos, propondo que a verdadeira raiz do problema não é psicológica, mas sim a escassez de experiências reais e o desaparecimento dos espaços de pertencimento físico.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="filmrule"></div>
+
+  <!-- SEÇÃO DE DESIGN GRÁFICO -->
+  <section id="design" class="track">
+    <div class="container">
+      <div class="track-header reveal">
+        <h2 class="track-title"><span class="track-chip v">V2</span> <span id="design-title">Design Gráfico</span></h2>
+      </div>
+      <div class="design-gallery" id="design-gallery"></div>
+    </div>
+  </section>
+
+  <div class="filmrule"></div>
+
+  <section id="skills" class="reveal">
+    <div class="container">
+      <p class="eyebrow center">Ficha Técnica</p>
+      <h2 id="skills-title">Habilidades Técnicas</h2>
+      <ul>
+        <li><strong>Softwares de Edição e Design:</strong>
+          <ul>
+            <li>Adobe Premiere: Avançado</li>
+            <li>Adobe Photoshop: Avançado</li>
+            <li>Adobe After Effects: Avançado</li>
+            <li>Adobe Lightroom: Avançado</li>
+            <li>Final Cut Pro: Avançado</li>
+            <li>Davinci Resolve: Avançado</li>
+          </ul>
+        </li>
+        <li><strong>Outras Ferramentas:</strong>
+          <ul>
+            <li>Excel/Google Planilhas: Avançado</li>
+            <li>Word: Avançado</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="experience" class="reveal">
+    <div class="container">
+      <p class="eyebrow center">Créditos</p>
+      <h2 id="experience-title">Experiência Profissional</h2>
+      <ul>
+        <li><strong>Diretor de fotografia/Editor/Diretor – O mundo que ela trouxe (2026)</strong></li>
+        <li><strong>Som Direto – Documentário universitário “Em busca de um lar” (2022)</strong></li>
+        <li><strong>Assistente de Produção – Curta universitário “Paragominas” (2023)</strong></li>
+        <li><strong>Estagiário nas Ilhas de Edição – PUC-Rio (Agosto de 2023 – Fevereiro de 2024)</strong></li>
+        <li><strong>Som Direto/Montagem – Curta “Vestido de Noiva” (2024)</strong></li>
+        <li><strong>Videomaker/Editor de vídeo – Página do Instagram @nossoolharcarioca (2025)</strong></li>
+        <li><strong>Videomaker/Editor/Diretor – Videoclipe Incertezas (2024)</strong></li>
+        <li><strong>Videomaker – High Company (2024)</strong></li>
+        <li>
+          <strong>Content Creator / Video Editor – CoreboysHubClips (2025)</strong><br>
+          <a href="https://www.tiktok.com/@coreboyshubclips" target="_blank">TikTok</a> |
+          <a href="https://www.youtube.com/@CoreboysHubClips" target="_blank">YouTube</a>
+        </li>
+      </ul>
+
+      <h3 id="project-title">Projeto Pessoal</h3>
+      <p id="project-desc">Perfil no TikTok sobre moda, cinema e música:
+        <a href="https://www.tiktok.com/@ladobdacena" target="_blank">Lado B da Cena</a>
+      </p>
+
+      <p id="project-desc">Perfil no Substack sobre moda, cinema e música:
+        <a href="https://substack.com/@ladobdacena" target="_blank">Lado B da Cena</a>
+      </p>
+
+      <h3 id="certificates-title">Certificados</h3>
+      <ul>
+        <li>2013 – Exame A1 Movers Cambridge English</li>
+        <li>2019 – Diploma de término de curso Cultura Inglesa</li>
+        <li>2022 – Curso Office 365</li>
+        <li>2023 – Curso Edição e Negócios</li>
+        <li>2024 – Curso Comercialização e Distribuição para o Audiovisual</li>
+        <li>2024 – Curso Legislação e Negócios para o Audiovisual</li>
+        <li>2024 – Curso Formação Pedagógica: Empreendedorismo e BNCC</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="filmrule"></div>
+
+  <section id="contact" class="credits reveal">
+    <div class="container">
+      <p class="credits-title">Fim · <span id="contact-title">Contato</span></p>
+      <p id="contact-phone"><strong>Telefone:</strong> (21) 9 7455-4444</p>
+      <p id="contact-instagram"><strong>Instagram:</strong> @insidereismind</p>
+      <p id="contact-email"><strong>E-mail:</strong> <a href="mailto:lipereis99@hotmail.com">lipereis99@hotmail.com</a></p>
+      <p id="contact-linkedin"><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/felipe-gomes-0220b7247/" target="_blank">Felipe Gomes</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Felipe Reis. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
