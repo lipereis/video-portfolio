@@ -333,6 +333,9 @@ nav ul li a:hover { color: var(--orange); }
   justify-content: center;
 }
 .vertical-gallery .video-card iframe { height: 480px; }
+/* Embed do Instagram tem largura mínima de ~326px e inclui cabeçalho e rodapé */
+.instagram-gallery { grid-template-columns: repeat(auto-fit, minmax(326px, 340px)); }
+.instagram-gallery .video-card iframe { height: 640px; }
 
 /* ---------- DESIGN GRÁFICO ---------- */
 .design-gallery {
@@ -509,5 +512,6 @@ footer p {
 @media (max-width: 768px) {
   .video-gallery, .design-gallery { grid-template-columns: 1fr; }
   .vertical-gallery { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+  .instagram-gallery { grid-template-columns: minmax(0, 340px); }
   .screenplay-gallery.standard { grid-template-columns: 1fr; }
 }

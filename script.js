@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
       filmsTitle: 'Filmes',
       gameplayTitle: 'Gameplays',
       verticalTitle: 'Vídeos Verticais',
+      instagramTitle: 'Instagram',
       designTitle: 'Design Gráfico',
 
       roteirosTitle: 'Roteiros',
@@ -62,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
       filmsTitle: 'Films',
       gameplayTitle: 'Gameplays',
       verticalTitle: 'Vertical Videos',
+      instagramTitle: 'Instagram',
       designTitle: 'Graphic Design',
 
       roteirosTitle: 'Screenplays',
@@ -131,6 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('films-title').textContent = lang.filmsTitle;
     document.getElementById('gameplay-title').textContent = lang.gameplayTitle;
     document.getElementById('vertical-title').textContent = lang.verticalTitle;
+    document.getElementById('instagram-title').textContent = lang.instagramTitle;
     document.getElementById('design-title').textContent = lang.designTitle;
 
     document.getElementById('roteiros-title').textContent = lang.roteirosTitle;
@@ -293,6 +296,24 @@ document.addEventListener('DOMContentLoaded', () => {
     },
   ];
 
+  // INSTAGRAM (reels de @insidereismind)
+  // Para adicionar: copie o link do reel e acrescente "embed" no final,
+  // ex.: https://www.instagram.com/reel/ABC123xyz/embed
+  const instagram = [
+    {
+      title: 'Em busca do Ombro Cebola',
+      url: 'https://www.instagram.com/reel/DdpWvA1O38d/embed',
+    },
+    {
+      title: 'Peito + Tríceps',
+      url: 'https://www.instagram.com/reel/DdkVBOigTOr/embed',
+    },
+    {
+      title: 'Saudades prime Post Malone',
+      url: 'https://www.instagram.com/reel/Ddm2luJAZ2n/embed',
+    },
+  ];
+
   function renderGallery(containerId, items) {
     const container = document.getElementById(containerId);
     items.forEach((v) => {
@@ -306,6 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderGallery('video-gallery', films);
   renderGallery('gameplay-gallery', gameplays);
   renderGallery('vertical-gallery', verticals);
+  renderGallery('instagram-gallery', instagram);
 
   // DESIGN
   const designWorks = [
