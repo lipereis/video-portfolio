@@ -328,6 +328,31 @@ nav ul li a:hover { color: var(--orange); }
   color: var(--text);
 }
 
+/* ---------- CANAL DO YOUTUBE ---------- */
+.channel-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 24px 28px;
+  border: 1px solid var(--orange);
+  border-radius: 6px;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--orange) 9%, var(--surface)), var(--surface) 65%);
+}
+.channel-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.channel-desc { color: var(--text-muted); margin-top: 4px; max-width: 60ch; }
+/* Vídeos do canal são Shorts (vertical); para vídeos 16:9 use uma altura menor */
+.featured-gallery { grid-template-columns: repeat(auto-fit, minmax(240px, 300px)); justify-content: center; }
+.featured-gallery .video-card { border-color: color-mix(in srgb, var(--orange) 45%, var(--border)); }
+.featured-gallery .video-card iframe { height: 520px; }
+
 .vertical-gallery {
   grid-template-columns: repeat(auto-fit, minmax(220px, 260px));
   justify-content: center;
@@ -511,6 +536,7 @@ footer p {
 
 @media (max-width: 768px) {
   .video-gallery, .design-gallery { grid-template-columns: 1fr; }
+  .featured-gallery { grid-template-columns: minmax(0, 300px); }
   .vertical-gallery { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
   .instagram-gallery { grid-template-columns: minmax(0, 340px); }
   .screenplay-gallery.standard { grid-template-columns: 1fr; }

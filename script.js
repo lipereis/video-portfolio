@@ -9,6 +9,12 @@ document.addEventListener('DOMContentLoaded', () => {
       aboutLanguages:
         '<strong>Idiomas:</strong><br>• Inglês: Avançado<br>• Espanhol: Avançado',
 
+      youtubeTitle: 'Canal no YouTube',
+      youtubeDesc:
+        'Meu canal pessoal: vídeo-ensaios, cinema, games e cultura pop.',
+      youtubeFeatured: 'Vídeos em Destaque',
+      youtubeCta: 'Inscrever-se',
+
       portfolioTitle: 'Portfólio',
       filmsTitle: 'Filmes',
       gameplayTitle: 'Gameplays',
@@ -42,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
       themeDark: 'Modo Escuro',
 
       navAbout: 'Sobre',
+      navYoutube: 'YouTube',
       navPortfolio: 'Portfólio',
       navDesign: 'Design Gráfico',
       navRoteiros: 'Roteiros',
@@ -58,6 +65,12 @@ document.addEventListener('DOMContentLoaded', () => {
         '<strong>Education:</strong> Social Communication – PUC-Rio, graduated in June 2024.',
       aboutLanguages:
         '<strong>Languages:</strong><br>• English: Advanced<br>• Spanish: Advanced',
+
+      youtubeTitle: 'YouTube Channel',
+      youtubeDesc:
+        'My personal channel: video essays, cinema, games and pop culture.',
+      youtubeFeatured: 'Featured Videos',
+      youtubeCta: 'Subscribe',
 
       portfolioTitle: 'Portfolio',
       filmsTitle: 'Films',
@@ -92,6 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
       themeDark: 'Dark Mode',
 
       navAbout: 'About',
+      navYoutube: 'YouTube',
       navPortfolio: 'Portfolio',
       navDesign: 'Graphic Design',
       navRoteiros: 'Screenplays',
@@ -127,6 +141,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('about-objective').innerHTML = lang.aboutObjective;
     document.getElementById('about-education').innerHTML = lang.aboutEducation;
     document.getElementById('about-languages').innerHTML = lang.aboutLanguages;
+
+    document.getElementById('youtube-title').textContent = lang.youtubeTitle;
+    document.getElementById('youtube-desc').textContent = lang.youtubeDesc;
+    document.getElementById('youtube-featured-title').textContent =
+      lang.youtubeFeatured;
+    document.getElementById('youtube-cta').textContent = lang.youtubeCta;
 
     document.getElementById('portfolio-title').textContent =
       lang.portfolioTitle;
@@ -166,6 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
     themeToggleBtn.textContent = isLightTheme ? lang.themeDark : lang.themeLight;
 
     document.getElementById('nav-about').textContent = lang.navAbout;
+    document.getElementById('nav-youtube').textContent = lang.navYoutube;
     document.getElementById('nav-portfolio').textContent = lang.navPortfolio;
     document.getElementById('nav-design').textContent = lang.navDesign;
     document.getElementById('nav-roteiros').textContent = lang.navRoteiros;
@@ -173,6 +194,19 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('nav-experience').textContent = lang.navExperience;
     document.getElementById('nav-contact').textContent = lang.navContact;
   }
+
+  // CANAL DO YOUTUBE (@reisocriador) - vídeos em destaque
+  // Para adicionar: use o ID do vídeo (watch?v=ID) em https://www.youtube.com/embed/ID
+  const youtubeFeatured = [
+    {
+      title: '13 anos esperando o GTA 6… e eu nem vou jogar',
+      url: 'https://www.youtube.com/embed/AF9RufiXu1A',
+    },
+    {
+      title: 'Hollywood não consegue deixar essa história em paz. E talvez tenha um motivo…',
+      url: 'https://www.youtube.com/embed/T07afyg31zU',
+    },
+  ];
 
   // FILMES (vídeos horizontais - YouTube/Vimeo)
   const films = [
@@ -324,6 +358,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  renderGallery('youtube-gallery', youtubeFeatured);
   renderGallery('video-gallery', films);
   renderGallery('gameplay-gallery', gameplays);
   renderGallery('vertical-gallery', verticals);
