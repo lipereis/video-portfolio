@@ -16,10 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
       youtubeCta: 'Inscrever-se',
 
       portfolioTitle: 'Portfólio',
-      filmsTitle: 'Filmes',
-      gameplayTitle: 'Gameplays',
-      verticalTitle: 'Vídeos Verticais',
-      instagramTitle: 'Instagram',
+      filmsTitle: 'Trabalhos Selecionados',
+      verticalTitle: 'Short-form · Redes Sociais',
+      showreelCaption: 'Showreel 2026 · 1:28',
+      equipmentTitle: 'Equipamentos:',
       designTitle: 'Design Gráfico',
 
       roteirosTitle: 'Roteiros',
@@ -43,7 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "LinkedIn: <a href='https://www.linkedin.com/in/felipe-gomes-0220b7247/' target='_blank'>Felipe Gomes</a>",
 
       ctaPortfolio: 'Ver Portfólio',
-      ctaRoteiros: 'Ler Roteiros',
+      ctaCvPt: 'Baixar CV · PT',
+      ctaCvEn: 'Baixar CV · EN',
       themeLight: 'Modo Claro',
       themeDark: 'Modo Escuro',
 
@@ -73,10 +74,10 @@ document.addEventListener('DOMContentLoaded', () => {
       youtubeCta: 'Subscribe',
 
       portfolioTitle: 'Portfolio',
-      filmsTitle: 'Films',
-      gameplayTitle: 'Gameplays',
-      verticalTitle: 'Vertical Videos',
-      instagramTitle: 'Instagram',
+      filmsTitle: 'Selected Work',
+      verticalTitle: 'Short-form · Social Media',
+      showreelCaption: 'Showreel 2026 · 1:28',
+      equipmentTitle: 'Equipment:',
       designTitle: 'Graphic Design',
 
       roteirosTitle: 'Screenplays',
@@ -100,7 +101,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "LinkedIn: <a href='https://www.linkedin.com/in/felipe-gomes-0220b7247/' target='_blank'>Felipe Gomes</a>",
 
       ctaPortfolio: 'View Portfolio',
-      ctaRoteiros: 'Read Screenplays',
+      ctaCvPt: 'Download CV · PT',
+      ctaCvEn: 'Download CV · EN',
       themeLight: 'Light Mode',
       themeDark: 'Dark Mode',
 
@@ -151,9 +153,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('portfolio-title').textContent =
       lang.portfolioTitle;
     document.getElementById('films-title').textContent = lang.filmsTitle;
-    document.getElementById('gameplay-title').textContent = lang.gameplayTitle;
     document.getElementById('vertical-title').textContent = lang.verticalTitle;
-    document.getElementById('instagram-title').textContent = lang.instagramTitle;
+    document.getElementById('showreel-caption').textContent = lang.showreelCaption;
+    document.getElementById('equipment-title').textContent = lang.equipmentTitle;
     document.getElementById('design-title').textContent = lang.designTitle;
 
     document.getElementById('roteiros-title').textContent = lang.roteirosTitle;
@@ -179,7 +181,8 @@ document.addEventListener('DOMContentLoaded', () => {
       lang.contactLinkedIn;
 
     document.getElementById('cta-portfolio').textContent = lang.ctaPortfolio;
-    document.getElementById('cta-roteiros').textContent = lang.ctaRoteiros;
+    document.getElementById('cta-cv-pt').textContent = lang.ctaCvPt;
+    document.getElementById('cta-cv-en').textContent = lang.ctaCvEn;
 
     const themeToggleBtn = document.getElementById('themeToggle');
     const isLightTheme = document.documentElement.getAttribute('data-theme') === 'light';
@@ -208,143 +211,51 @@ document.addEventListener('DOMContentLoaded', () => {
     },
   ];
 
-  // FILMES (vídeos horizontais - YouTube/Vimeo)
+  // PORTFÓLIO — 8 trabalhos selecionados.
+  // role: função no projeto (aparece abaixo do título). Deixe '' se não quiser mostrar.
   const films = [
     {
-      title: 'Documentário: O mundo que ela trouxe (2026)',
+      title: 'O mundo que ela trouxe · Documentário (2026)',
+      role: 'Direção · Direção de Fotografia · Edição',
       url: 'https://www.youtube.com/embed/o2RNlff0gdg',
     },
-
     {
-      title: 'Como Conseguir o Seu Sonho (2026)',
-      url: 'https://www.youtube.com/embed/n4waVv-_eJE',
-    },
-
-    {
-      title: 'DEATHSTRANDING (2026)',
-      url: 'https://www.youtube.com/embed/V5ZdKU5TEfk',
+      title: 'Incertezas · Videoclipe (2024)',
+      role: 'Direção · Câmera · Edição',
+      url: 'https://www.youtube.com/embed/zlg6i-vp2tU',
     },
     {
-      title: ' Diablo 4: Lord of Hatred (2026)',
-      url: 'https://www.youtube.com/embed/OX6cluUsyKY',
-    },
-
-    {
-      title: 'Xalatath (2026)',
-      url: 'https://www.youtube.com/embed/F8EdaCiN1lI',
-    },
-    {
-      title: 'Love Takes Miles (2026)',
-      url: 'https://www.youtube.com/embed/wtwXGe2Vqrg',
-    },
-
-    {
-      title: 'MEDALION (2026)',
-      url: 'https://www.youtube.com/embed/EFto1rWsTXU',
-    },
-    {
-      title: 'Reis do Caos Motion Intro (2026)',
-      url: 'https://www.youtube.com/embed/DjCcXgElq4s',
-    },
-
-    {
-      title: 'Gol Motion Vasco da Gama (2025)',
-      url: 'https://www.youtube.com/embed/TEaWDaNw3Sg',
-    },
-    {
-      title: 'Zach Doelling Raw Files (2025)',
-      url: 'https://player.vimeo.com/video/1161442658',
-    },
-    {
-      title: 'Yosemite (2026)',
-      url: 'https://player.vimeo.com/video/1157398045',
-    },
-    {
-      title: 'SKATE OR DIE (2025)',
-      url: 'https://www.youtube.com/embed/3QJTZKdjaXY',
-    },
-    {
-      title: 'Cidade Maravilhosa (2023)',
-      url: 'https://player.vimeo.com/video/844086701',
-    },
-    { title: 'HIGH (2024)', url: 'https://player.vimeo.com/video/1121867258' },
-    {
-      title: 'Vestido de Noiva (2024)',
+      title: 'Vestido de Noiva · Curta-metragem (2024)',
+      role: 'Som Direto · Montagem',
       url: 'https://player.vimeo.com/video/1121862329',
     },
     {
-      title: 'Clipe Incertezas (2024)',
-      url: 'https://www.youtube.com/embed/zlg6i-vp2tU',
+      title: 'HIGH · High Company (2024)',
+      role: 'Videomaker',
+      url: 'https://player.vimeo.com/video/1121867258',
+    },
+    {
+      title: 'O que os videogames me ensinaram sobre contar histórias',
+      role: 'Vídeo-ensaio · Canal Reis, o Criador',
+      url: 'https://www.youtube.com/embed/-i2qpSbiT2Q',
+    },
+    {
+      title: 'Yosemite (2026)',
+      role: '',
+      url: 'https://player.vimeo.com/video/1157398045',
     },
   ];
 
-  // GAMEPLAYS
-  const gameplays = [
-    {
-      title: 'Modern Warfare 2019 in 2026',
-      url: 'https://www.youtube.com/embed/mMCaYn34Fp0',
-    },
-    {
-      title: 'Valorant Video',
-      url: 'https://www.youtube.com/embed/Nx3w6twfwfs',
-    },
-    {
-      title: 'League of Legends Video 1',
-      url: 'https://www.youtube.com/embed/zqTpvIVZxN4',
-    },
-    {
-      title: 'League of Legends Video 2',
-      url: 'https://www.youtube.com/embed/ax5nZJrzUsc',
-    },
-  ];
-
-  // VÍDEOS VERTICAIS (TikTok)
   const verticals = [
     {
-      title: 'Core boys Hub Clips #1',
+      title: 'CoreboysHubClips (2025)',
+      role: 'Edição short-form · TikTok / YouTube',
       url: 'https://www.tiktok.com/embed/7561680704942230815',
     },
     {
-      title: 'Core boys Hub Clips #2',
-      url: 'https://www.tiktok.com/embed/7596852253919612191',
-    },
-
-    {
-      title: 'Você é uma pessoa boa?',
-      url: 'https://www.youtube.com/embed/O1dKtDHYx3k',
-    },
-
-    {
-      title: 'Core boys Hub Clips #3',
-      url: 'https://www.tiktok.com/embed/7603356192781520159',
-    },
-
-    {
-      title: 'LOL Clipe',
-      url: 'https://www.youtube.com/embed/-Roy82tL6SQ',
-    },
-
-    {
       title: 'Scarface',
+      role: '',
       url: 'https://www.tiktok.com/embed/7494026388328959238',
-    },
-  ];
-
-  // INSTAGRAM (reels de @insidereismind)
-  // Para adicionar: copie o link do reel e acrescente "embed" no final,
-  // ex.: https://www.instagram.com/reel/ABC123xyz/embed
-  const instagram = [
-    {
-      title: 'Em busca do Ombro Cebola',
-      url: 'https://www.instagram.com/reel/DdpWvA1O38d/embed',
-    },
-    {
-      title: 'Peito + Tríceps',
-      url: 'https://www.instagram.com/reel/DdkVBOigTOr/embed',
-    },
-    {
-      title: 'Saudades prime Post Malone',
-      url: 'https://www.instagram.com/reel/Ddm2luJAZ2n/embed',
     },
   ];
 
@@ -353,16 +264,15 @@ document.addEventListener('DOMContentLoaded', () => {
     items.forEach((v) => {
       const card = document.createElement('div');
       card.className = 'video-card';
-      card.innerHTML = `<iframe src="${v.url}" frameborder="0" allowfullscreen></iframe><h3>${v.title}</h3>`;
+      const role = v.role ? `<p class="video-role">${v.role}</p>` : '';
+      card.innerHTML = `<iframe src="${v.url}" loading="lazy" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe><h3>${v.title}</h3>${role}`;
       container.appendChild(card);
     });
   }
 
   renderGallery('youtube-gallery', youtubeFeatured);
   renderGallery('video-gallery', films);
-  renderGallery('gameplay-gallery', gameplays);
   renderGallery('vertical-gallery', verticals);
-  renderGallery('instagram-gallery', instagram);
 
   // DESIGN
   const designWorks = [

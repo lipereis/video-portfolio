@@ -5,6 +5,29 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Felipe Reis - Videomaker Portfolio</title>
+  <meta name="description" content="Felipe Reis: editor de vídeo, videomaker e filmmaker no Rio de Janeiro. Showreel, documentários, videoclipes, curtas e conteúdo para redes." />
+  <meta name="author" content="Felipe Reis" />
+  <meta name="theme-color" content="#0A0D10" />
+  <link rel="canonical" href="https://lipereis.github.io/video-portfolio/" />
+  <link rel="icon" href="./img/reis_logo.png" />
+
+  <!-- Open Graph (preview no WhatsApp, LinkedIn, Facebook) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:site_name" content="Felipe Reis" />
+  <meta property="og:title" content="Felipe Reis · Editor de Vídeo &amp; Filmmaker" />
+  <meta property="og:description" content="Showreel 2026 e trabalhos selecionados: documentário, videoclipe, curta-metragem, publicidade e short-form." />
+  <meta property="og:url" content="https://lipereis.github.io/video-portfolio/" />
+  <meta property="og:image" content="https://lipereis.github.io/video-portfolio/img/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Frame do showreel de Felipe Reis" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Felipe Reis · Editor de Vídeo &amp; Filmmaker" />
+  <meta name="twitter:description" content="Showreel 2026 e trabalhos selecionados: documentário, videoclipe, curta-metragem, publicidade e short-form." />
+  <meta name="twitter:image" content="https://lipereis.github.io/video-portfolio/img/og-image.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;600;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -27,9 +50,9 @@
 
       <nav>
         <ul>
+          <li><a href="#portfolio" id="nav-portfolio">Portfólio</a></li>
           <li><a href="#about" id="nav-about">Sobre</a></li>
           <li><a href="#youtube" id="nav-youtube">YouTube</a></li>
-          <li><a href="#portfolio" id="nav-portfolio">Portfólio</a></li>
           <li><a href="#roteiros" id="nav-roteiros">Roteiros</a></li>
           <li><a href="#design" id="nav-design">Design Gráfico</a></li>
           <li><a href="#skills" id="nav-skills">Habilidades</a></li>
@@ -64,8 +87,37 @@
       </div>
       <div class="cta-row">
         <a class="btn solid" href="#portfolio" id="cta-portfolio">Ver Portfólio</a>
-        <a class="btn outline" href="#roteiros" id="cta-roteiros">Ler Roteiros</a>
+        <a class="btn outline" href="cv/Felipe_Reis_CV_PT.pdf" download id="cta-cv-pt">Baixar CV · PT</a>
+        <a class="btn outline" href="cv/Felipe_Reis_CV_EN.pdf" download id="cta-cv-en">Baixar CV · EN</a>
       </div>
+
+      <!-- SHOWREEL -->
+      <figure class="showreel" id="showreel">
+        <div class="showreel-frame">
+          <video controls playsinline preload="metadata" poster="video/showreel_poster.jpg">
+            <source src="video/showreel.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <figcaption><span class="rec">● REC</span> <span id="showreel-caption">Showreel 2026 · 1:28</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="filmrule"></div>
+
+  <section id="portfolio" class="track">
+    <div class="container">
+      <div class="track-header reveal">
+        <h2 class="track-title"><span class="track-chip v">V1</span> <span id="portfolio-title">Portfólio</span></h2>
+      </div>
+
+      <!-- TRABALHOS SELECIONADOS (horizontais) -->
+      <h3 class="portfolio-subtitle" id="films-title">Trabalhos Selecionados</h3>
+      <div class="video-gallery" id="video-gallery"></div>
+
+      <!-- SHORT-FORM (verticais) -->
+      <h3 class="portfolio-subtitle" id="vertical-title">Short-form · Redes Sociais</h3>
+      <div class="video-gallery vertical-gallery" id="vertical-gallery"></div>
     </div>
   </section>
 
@@ -102,32 +154,6 @@
       </div>
       <h3 class="portfolio-subtitle" id="youtube-featured-title">Vídeos em Destaque</h3>
       <div class="video-gallery featured-gallery" id="youtube-gallery"></div>
-    </div>
-  </section>
-
-  <div class="filmrule"></div>
-
-  <section id="portfolio" class="track">
-    <div class="container">
-      <div class="track-header reveal">
-        <h2 class="track-title"><span class="track-chip v">V1</span> <span id="portfolio-title">Portfólio</span></h2>
-      </div>
-
-      <!-- SUBTÓPICO FILMES -->
-      <h3 class="portfolio-subtitle" id="films-title">Filmes</h3>
-      <div class="video-gallery" id="video-gallery"></div>
-
-      <!-- SUBTÓPICO GAMEPLAYS -->
-      <h3 class="portfolio-subtitle" id="gameplay-title">Gameplays</h3>
-      <div class="video-gallery" id="gameplay-gallery"></div>
-
-      <!-- SUBTÓPICO VÍDEOS VERTICAIS -->
-      <h3 class="portfolio-subtitle" id="vertical-title">Vídeos Verticais</h3>
-      <div class="video-gallery vertical-gallery" id="vertical-gallery"></div>
-
-      <!-- SUBTÓPICO INSTAGRAM -->
-      <h3 class="portfolio-subtitle" id="instagram-title">Instagram</h3>
-      <div class="video-gallery vertical-gallery instagram-gallery" id="instagram-gallery"></div>
     </div>
   </section>
 
@@ -207,6 +233,14 @@
             <li>Adobe Lightroom: Avançado</li>
             <li>Final Cut Pro: Avançado</li>
             <li>Davinci Resolve: Avançado</li>
+          </ul>
+        </li>
+        <li><strong id="equipment-title">Equipamentos:</strong>
+          <ul>
+            <li>Nikon D600 (full-frame)</li>
+            <li>iPhone 17 Pro Max</li>
+            <li>Gimbal DJI Osmo Mobile 6</li>
+            <li>Microfone de lapela sem fio Hollyland Lark M2</li>
           </ul>
         </li>
         <li><strong>Outras Ferramentas:</strong>
