@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Orçamento · Felipe Reis</title>
+  <meta name="description" content="Peça um orçamento de edição de vídeo, motion ou videomaker com Felipe Reis." />
+  <meta name="theme-color" content="#0A0D10" />
+  <link rel="icon" href="../img/reis_logo.png" />
+  <meta property="og:title" content="Orçamento · Felipe Reis" />
+  <meta property="og:description" content="Edição de vídeo, motion e videomaker. Mande os detalhes do projeto por email." />
+  <meta property="og:image" content="https://lipereis.github.io/video-portfolio/img/og-image.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0A0D10;
+      --surface: #13171B;
+      --text: #ECEDEA;
+      --muted: #8890A0;
+      --orange: #FF6B3D;
+      --border: rgba(255, 255, 255, .1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+    }
+
+    main {
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+    }
+
+    h1 {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-weight: 900;
+      font-size: 44px;
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    h1 span { color: var(--orange); }
+
+    p {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .btn {
+      display: block;
+      margin-top: 28px;
+      padding: 16px;
+      border-radius: 10px;
+      background: var(--orange);
+      color: #0A0D10;
+      font-weight: 600;
+      font-size: 16px;
+      text-decoration: none;
+    }
+
+    .btn.secondary {
+      margin-top: 12px;
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      width: 100%;
+      font-family: inherit;
+    }
+
+    .email {
+      margin-top: 22px;
+      font-size: 14px;
+      color: var(--muted);
+      word-break: break-all;
+    }
+
+    .email strong { color: var(--text); font-weight: 500; }
+
+    .back {
+      display: inline-block;
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <h1>Vamos fazer seu <span>vídeo</span></h1>
+    <p>Edição, motion e captação. Conte o que você precisa: tipo de vídeo, duração, prazo e referências.</p>
+
+    <a id="mail" class="btn" href="#">Pedir orçamento por email</a>
+    <button id="copy" class="btn secondary" type="button">Copiar email</button>
+
+    <div class="email">ou escreva para <strong id="addr"></strong></div>
+
+    <a class="back" href="../">Ver portfólio</a>
+  </main>
+
+  <script>
+    var addr = 'felipedrg02' + '@' + 'gmail.com';
+    var subject = 'Orçamento de vídeo';
+    var body = 'Oi Felipe, quero um orçamento de edição.\n\n' +
+      'Tipo de vídeo:\nDuração:\nPrazo:\nReferências:\n';
+    var link = 'mailto:' + addr + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+
+    document.getElementById('addr').textContent = addr;
+    document.getElementById('mail').href = link;
+
+    document.getElementById('copy').addEventListener('click', function () {
+      var b = this;
+      var done = function () { b.textContent = 'Email copiado'; };
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(addr).then(done, function () { prompt('Copie o email:', addr); });
+      } else {
+        prompt('Copie o email:', addr);
+      }
+    });
+  </script>
+</body>
+
+</html>
