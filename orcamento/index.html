@@ -9,7 +9,7 @@
   <meta name="theme-color" content="#0A0D10" />
   <link rel="icon" href="../img/reis_logo.png" />
   <meta property="og:title" content="Orçamento · Felipe Reis" />
-  <meta property="og:description" content="Edição de vídeo, motion e videomaker. Mande os detalhes do projeto por email." />
+  <meta property="og:description" content="Edição de vídeo, motion e videomaker. Conte sobre o seu projeto e receba um orçamento." />
   <meta property="og:image" content="https://lipereis.github.io/video-portfolio/img/og-image.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,10 +18,12 @@
     :root {
       --bg: #0A0D10;
       --surface: #13171B;
+      --surface-2: #191E23;
       --text: #ECEDEA;
       --muted: #8890A0;
       --orange: #FF6B3D;
-      --border: rgba(255, 255, 255, .1);
+      --teal: #17B3A3;
+      --border: rgba(255, 255, 255, .12);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,19 +31,14 @@
     body {
       min-height: 100vh;
       display: flex;
-      align-items: center;
       justify-content: center;
-      padding: 24px 16px;
+      padding: 40px 16px;
       background: var(--bg);
       color: var(--text);
       font-family: 'Inter', sans-serif;
     }
 
-    main {
-      width: 100%;
-      max-width: 420px;
-      text-align: center;
-    }
+    main { width: 100%; max-width: 440px; }
 
     h1 {
       font-family: 'Big Shoulders Display', sans-serif;
@@ -49,54 +46,112 @@
       font-size: 44px;
       line-height: 1;
       text-transform: uppercase;
-      letter-spacing: .5px;
+      text-align: center;
     }
 
     h1 span { color: var(--orange); }
 
-    p {
-      margin-top: 14px;
+    .lead {
+      margin-top: 12px;
       color: var(--muted);
       font-size: 15px;
       line-height: 1.5;
+      text-align: center;
     }
+
+    form { margin-top: 28px; }
+
+    label {
+      display: block;
+      margin: 16px 0 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    label .opt { font-weight: 400; opacity: .7; }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 13px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font: inherit;
+      font-size: 16px; /* evita zoom automático no iPhone */
+    }
+
+    select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%); background-position: calc(100% - 20px) 55%, calc(100% - 15px) 55%; background-size: 5px 5px; background-repeat: no-repeat; }
+
+    textarea { min-height: 120px; resize: vertical; }
+
+    input:focus, select:focus, textarea:focus { outline: 2px solid var(--orange); outline-offset: 1px; }
+
+    .hp { position: absolute; left: -9999px; }
 
     .btn {
       display: block;
-      margin-top: 28px;
+      width: 100%;
+      margin-top: 24px;
       padding: 16px;
+      border: 0;
       border-radius: 10px;
       background: var(--orange);
       color: #0A0D10;
+      font: inherit;
       font-weight: 600;
       font-size: 16px;
-      text-decoration: none;
-    }
-
-    .btn.secondary {
-      margin-top: 12px;
-      background: var(--surface);
-      color: var(--text);
-      border: 1px solid var(--border);
       cursor: pointer;
-      width: 100%;
-      font-family: inherit;
     }
 
-    .email {
-      margin-top: 22px;
+    .btn[disabled] { opacity: .6; cursor: wait; }
+
+    .status {
+      margin-top: 14px;
       font-size: 14px;
-      color: var(--muted);
-      word-break: break-all;
+      line-height: 1.5;
+      text-align: center;
+      min-height: 1em;
     }
 
-    .email strong { color: var(--text); font-weight: 500; }
+    .status.err { color: #FF8A8A; }
+
+    .done {
+      display: none;
+      margin-top: 32px;
+      padding: 28px 20px;
+      border-radius: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .done h2 {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 32px;
+      text-transform: uppercase;
+      color: var(--teal);
+    }
+
+    .done p { margin-top: 10px; color: var(--muted); line-height: 1.5; }
+
+    .alt {
+      margin-top: 28px;
+      font-size: 13px;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .alt a { color: var(--text); }
 
     .back {
-      display: inline-block;
-      margin-top: 28px;
+      display: block;
+      margin-top: 20px;
       color: var(--muted);
       font-size: 14px;
+      text-align: center;
     }
   </style>
 </head>
@@ -104,34 +159,118 @@
 <body>
   <main>
     <h1>Vamos fazer seu <span>vídeo</span></h1>
-    <p>Edição, motion e captação. Conte o que você precisa: tipo de vídeo, duração, prazo e referências.</p>
+    <p class="lead">Edição, motion e captação. Conte sobre o projeto e eu respondo com um orçamento.</p>
 
-    <a id="mail" class="btn" href="#">Pedir orçamento por email</a>
-    <button id="copy" class="btn secondary" type="button">Copiar email</button>
+    <form id="form" novalidate>
+      <label for="nome">Seu nome</label>
+      <input id="nome" name="nome" autocomplete="name" required />
 
-    <div class="email">ou escreva para <strong id="addr"></strong></div>
+      <label for="email">Seu email</label>
+      <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required />
 
+      <label for="whatsapp">WhatsApp <span class="opt">(opcional)</span></label>
+      <input id="whatsapp" name="whatsapp" type="tel" autocomplete="tel" inputmode="tel" placeholder="(21) 99999-9999" />
+
+      <label for="tipo">Tipo de vídeo</label>
+      <select id="tipo" name="tipo" required>
+        <option value="">Escolha uma opção</option>
+        <option>Reels / TikTok / Shorts</option>
+        <option>Vídeo para YouTube</option>
+        <option>Cortes de live ou podcast</option>
+        <option>Institucional / publicidade</option>
+        <option>Evento / aftermovie</option>
+        <option>Motion design / animação</option>
+        <option>Videoclipe</option>
+        <option>Documentário / curta</option>
+        <option>Outro</option>
+      </select>
+
+      <label for="prazo">Prazo <span class="opt">(opcional)</span></label>
+      <input id="prazo" name="prazo" placeholder="Ex.: até 10/12" />
+
+      <label for="mensagem">Conte sobre o projeto</label>
+      <textarea id="mensagem" name="mensagem" required placeholder="Quantos vídeos, duração, referências, se já tem o material gravado..."></textarea>
+
+      <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+      <button class="btn" id="enviar" type="submit">Enviar pedido de orçamento</button>
+      <div class="status" id="status" role="status" aria-live="polite"></div>
+    </form>
+
+    <div class="done" id="done">
+      <h2>Recebido!</h2>
+      <p>Obrigado pelo contato. Respondo em breve no email ou WhatsApp que você deixou.</p>
+    </div>
+
+    <p class="alt">Prefere escrever direto? <a id="mailto" href="#">Mande um email</a></p>
     <a class="back" href="../">Ver portfólio</a>
   </main>
 
   <script>
-    var addr = 'felipedrg02' + '@' + 'gmail.com';
-    var subject = 'Orçamento de vídeo';
-    var body = 'Oi Felipe, quero um orçamento de edição.\n\n' +
-      'Tipo de vídeo:\nDuração:\nPrazo:\nReferências:\n';
-    var link = 'mailto:' + addr + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    var ADDR = 'felipedrg02' + '@' + 'gmail.com';
+    var ENDPOINT = 'https://formsubmit.co/ajax/' + ADDR;
 
-    document.getElementById('addr').textContent = addr;
-    document.getElementById('mail').href = link;
+    document.getElementById('mailto').href = 'mailto:' + ADDR + '?subject=' + encodeURIComponent('Orçamento de vídeo');
 
-    document.getElementById('copy').addEventListener('click', function () {
-      var b = this;
-      var done = function () { b.textContent = 'Email copiado'; };
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(addr).then(done, function () { prompt('Copie o email:', addr); });
-      } else {
-        prompt('Copie o email:', addr);
+    var form = document.getElementById('form');
+    var btn = document.getElementById('enviar');
+    var status = document.getElementById('status');
+
+    function erro(msg) {
+      status.className = 'status err';
+      status.textContent = msg;
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var obrig = ['nome', 'email', 'tipo', 'mensagem'];
+      for (var i = 0; i < obrig.length; i++) {
+        var campo = form.elements[obrig[i]];
+        if (!campo.value.trim()) {
+          campo.focus();
+          return erro('Preencha os campos obrigatórios.');
+        }
       }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.value.trim())) {
+        form.email.focus();
+        return erro('Confira o seu email.');
+      }
+      if (form._honey.value) return; // robô
+
+      var dados = {
+        nome: form.nome.value.trim(),
+        email: form.email.value.trim(),
+        whatsapp: form.whatsapp.value.trim() || '-',
+        tipo: form.tipo.value,
+        prazo: form.prazo.value.trim() || '-',
+        mensagem: form.mensagem.value.trim(),
+        _subject: 'Novo orçamento: ' + form.tipo.value + ' (' + form.nome.value.trim() + ')',
+        _replyto: form.email.value.trim(),
+        _template: 'table',
+        _captcha: 'false'
+      };
+
+      btn.disabled = true;
+      btn.textContent = 'Enviando...';
+      status.className = 'status';
+      status.textContent = '';
+
+      fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(dados)
+      })
+        .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+        .then(function (res) {
+          if (!res.ok || String(res.j.success) !== 'true') throw new Error(res.j.message || 'falha');
+          form.style.display = 'none';
+          document.getElementById('done').style.display = 'block';
+        })
+        .catch(function () {
+          btn.disabled = false;
+          btn.textContent = 'Enviar pedido de orçamento';
+          erro('Não consegui enviar agora. Tente de novo ou mande um email para ' + ADDR + '.');
+        });
     });
   </script>
 </body>
