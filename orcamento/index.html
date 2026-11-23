@@ -214,11 +214,11 @@
 
     var form = document.getElementById('form');
     var btn = document.getElementById('enviar');
-    var status = document.getElementById('status');
+    var statusEl = document.getElementById('status');
 
     function erro(msg) {
-      status.className = 'status err';
-      status.textContent = msg;
+      statusEl.className = 'status err';
+      statusEl.textContent = msg;
     }
 
     form.addEventListener('submit', function (e) {
@@ -252,8 +252,8 @@
 
       btn.disabled = true;
       btn.textContent = 'Enviando...';
-      status.className = 'status';
-      status.textContent = '';
+      statusEl.className = 'status';
+      statusEl.textContent = '';
 
       fetch(ENDPOINT, {
         method: 'POST',
