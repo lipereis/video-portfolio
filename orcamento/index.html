@@ -5,17 +5,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Orçamento · Felipe Reis</title>
-  <meta name="description" content="Peça um orçamento de edição de vídeo, motion ou videomaker com Felipe Reis." />
+  <meta name="description" content="Simule o orçamento do seu vídeo e peça uma proposta para Felipe Reis: edição, motion e captação." />
   <meta name="theme-color" content="#0A0D10" />
   <link rel="icon" href="../img/reis_logo.png" />
   <meta property="og:title" content="Orçamento · Felipe Reis" />
-  <meta property="og:description" content="Edição de vídeo, motion e videomaker. Conte sobre o seu projeto e receba um orçamento." />
+  <meta property="og:description" content="Simule o valor do seu vídeo em menos de um minuto e mande o pedido direto." />
   <meta property="og:image" content="https://lipereis.github.io/video-portfolio/img/og-image.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
+      color-scheme: dark;
       --bg: #0A0D10;
       --surface: #13171B;
       --surface-2: #191E23;
@@ -23,30 +24,29 @@
       --muted: #8890A0;
       --orange: #FF6B3D;
       --teal: #17B3A3;
+      --violet: #7C6CF0;
       --border: rgba(255, 255, 255, .12);
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * { margin: 0; padding: 0; box-sizing: border-box; min-width: 0; }
 
     body {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      padding: 40px 16px;
       background: var(--bg);
       color: var(--text);
-      font-family: 'Inter', sans-serif;
+      font: 16px/1.5 'Inter', system-ui, sans-serif;
+      overflow-x: clip;
     }
 
-    main { width: 100%; max-width: 440px; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 40px 16px 64px; }
+
+    header { margin-bottom: 28px; }
 
     h1 {
       font-family: 'Big Shoulders Display', sans-serif;
       font-weight: 900;
-      font-size: 44px;
+      font-size: clamp(40px, 7vw, 64px);
       line-height: 1;
       text-transform: uppercase;
-      text-align: center;
     }
 
     h1 span { color: var(--orange); }
@@ -54,197 +54,454 @@
     .lead {
       margin-top: 12px;
       color: var(--muted);
-      font-size: 15px;
-      line-height: 1.5;
-      text-align: center;
+      font-size: 16px;
+      max-width: 60ch;
     }
 
-    form { margin-top: 28px; }
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+      gap: 24px;
+      align-items: start;
+    }
 
-    label {
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+    }
+
+    .step + .step { margin-top: 24px; padding-top: 22px; border-top: 1px solid var(--border); }
+
+    h2 {
+      display: flex;
+      gap: 10px;
+      align-items: baseline;
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    h2 b {
+      font: 900 22px/1 'Big Shoulders Display', sans-serif;
+      color: var(--orange);
+    }
+
+    .opts { display: grid; grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); gap: 10px; }
+    .opts.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .opt { position: relative; }
+    .opt input { position: absolute; opacity: 0; pointer-events: none; }
+
+    .opt label {
       display: block;
-      margin: 16px 0 6px;
+      height: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--surface-2);
+      cursor: pointer;
+      transition: border-color .15s, background .15s;
+    }
+
+    .opt label:hover { border-color: rgba(255, 255, 255, .3); }
+    .opt input:checked + label { border-color: var(--orange); background: #2a1810; }
+    .opt input:focus-visible + label { outline: 2px solid var(--text); outline-offset: 2px; }
+    .opt strong { display: block; font-size: 15px; font-weight: 600; }
+    .opt span { display: block; color: var(--muted); font-size: 13px; line-height: 1.4; margin-top: 2px; }
+
+    .chk label { display: flex; justify-content: space-between; align-items: center; gap: 10px; min-height: 48px; }
+    .chk label strong { font-weight: 500; }
+    .chk label span { margin: 0; white-space: nowrap; }
+    .chk input:checked + label { border-color: var(--teal); background: #10251f; }
+
+    .qty { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: center; }
+
+    .qty output {
+      font: 900 32px/1 'Big Shoulders Display', sans-serif;
+      white-space: nowrap;
+      min-width: 4.5em;
+      text-align: right;
+    }
+
+    .qty output small { font: 500 14px 'Inter', sans-serif; color: var(--muted); margin-left: 4px; }
+    .hint { color: var(--muted); font-size: 14px; margin-top: 6px; }
+
+    input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 44px; background: transparent; cursor: pointer; }
+    input[type=range]::-webkit-slider-runnable-track { height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--orange) var(--p, 50%), var(--surface-2) var(--p, 50%)); }
+    input[type=range]::-moz-range-track { height: 6px; border-radius: 3px; background: var(--surface-2); }
+    input[type=range]::-moz-range-progress { height: 6px; border-radius: 3px; background: var(--orange); }
+    input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 24px; height: 24px; margin-top: -9px; border-radius: 50%; background: var(--text); border: 4px solid var(--orange); }
+    input[type=range]::-moz-range-thumb { width: 16px; height: 16px; border-radius: 50%; background: var(--text); border: 4px solid var(--orange); }
+    input[type=range]:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; border-radius: 6px; }
+
+    .result { position: sticky; top: 16px; }
+    .rlabel { color: var(--muted); font-size: 14px; }
+
+    .total {
+      font: 900 clamp(38px, 5vw, 54px)/1.05 'Big Shoulders Display', sans-serif;
+      margin: 4px 0;
+    }
+
+    .total span { color: var(--muted); font-weight: 700; }
+
+    .tl { margin: 18px 0 6px; border: 1px solid var(--border); border-radius: 10px; background: #07090b; overflow: hidden; }
+    .trk { display: flex; height: 40px; border-bottom: 1px solid #1c2126; }
+    .trk:last-child { border: 0; }
+    .trk > em { flex: none; width: 40px; display: grid; place-items: center; font: 600 11px 'Inter', sans-serif; font-style: normal; color: var(--muted); background: #0f1316; border-right: 1px solid var(--border); }
+    .lane { position: relative; flex: 1; }
+    .clip { position: absolute; top: 6px; bottom: 6px; border-radius: 5px; padding: 3px 7px; font-size: 12px; color: #0A0D10; font-weight: 600; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; transition: left .3s ease, width .3s ease; }
+    .clip.v1 { background: var(--orange); }
+    .clip.v2 { background: var(--teal); }
+    .clip.a1 { background: var(--violet); color: #fff; }
+
+    .lines { list-style: none; margin-top: 12px; font-size: 14px; }
+    .lines li { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; border-bottom: 1px dashed var(--border); }
+    .lines li span:last-child { white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .lines li.neg span:last-child { color: var(--teal); }
+    .lines li.sum { border: 0; font-weight: 700; font-size: 15px; }
+    .lines i { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 8px; }
+
+    .fine { color: var(--muted); font-size: 13px; margin-top: 10px; line-height: 1.5; }
+
+    form { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); }
+    form h3 { font: 900 26px/1.1 'Big Shoulders Display', sans-serif; text-transform: uppercase; }
+
+    label.f {
+      display: block;
+      margin: 14px 0 6px;
       font-size: 13px;
       font-weight: 500;
       color: var(--muted);
     }
 
-    label .opt { font-weight: 400; opacity: .7; }
+    label.f .opt-t { font-weight: 400; opacity: .7; }
 
-    input, select, textarea {
+    .field {
       width: 100%;
-      padding: 13px 14px;
+      padding: 12px 14px;
       border-radius: 10px;
       border: 1px solid var(--border);
-      background: var(--surface);
+      background: var(--surface-2);
       color: var(--text);
       font: inherit;
-      font-size: 16px; /* evita zoom automático no iPhone */
+      font-size: 16px;
     }
 
-    select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%); background-position: calc(100% - 20px) 55%, calc(100% - 15px) 55%; background-size: 5px 5px; background-repeat: no-repeat; }
-
-    textarea { min-height: 120px; resize: vertical; }
-
-    input:focus, select:focus, textarea:focus { outline: 2px solid var(--orange); outline-offset: 1px; }
+    textarea.field { min-height: 96px; resize: vertical; }
+    .field:focus { outline: 2px solid var(--orange); outline-offset: 1px; }
 
     .hp { position: absolute; left: -9999px; }
 
     .btn {
       display: block;
       width: 100%;
-      margin-top: 24px;
+      margin-top: 18px;
       padding: 16px;
       border: 0;
       border-radius: 10px;
       background: var(--orange);
       color: #0A0D10;
       font: inherit;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 16px;
       cursor: pointer;
     }
 
     .btn[disabled] { opacity: .6; cursor: wait; }
+    .btn:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
 
-    .status {
-      margin-top: 14px;
-      font-size: 14px;
-      line-height: 1.5;
-      text-align: center;
-      min-height: 1em;
-    }
-
+    .status { margin-top: 12px; font-size: 14px; text-align: center; min-height: 1em; }
     .status.err { color: #FF8A8A; }
 
     .done {
       display: none;
-      margin-top: 32px;
-      padding: 28px 20px;
+      margin-top: 20px;
+      padding: 26px 18px;
       border-radius: 12px;
-      background: var(--surface);
+      background: var(--surface-2);
       border: 1px solid var(--border);
       text-align: center;
     }
 
-    .done h2 {
-      font-family: 'Big Shoulders Display', sans-serif;
-      font-size: 32px;
-      text-transform: uppercase;
-      color: var(--teal);
+    .done h3 { font: 900 32px/1 'Big Shoulders Display', sans-serif; text-transform: uppercase; color: var(--teal); }
+    .done p { margin-top: 10px; color: var(--muted); }
+
+    .foot { margin-top: 36px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; color: var(--muted); font-size: 14px; }
+    .foot a { color: var(--text); }
+
+    .bar { display: none; }
+
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: minmax(0, 1fr); }
+      .result { position: static; }
     }
 
-    .done p { margin-top: 10px; color: var(--muted); line-height: 1.5; }
-
-    .alt {
-      margin-top: 28px;
-      font-size: 13px;
-      color: var(--muted);
-      text-align: center;
-      line-height: 1.6;
+    @media (max-width: 600px) {
+      .panel { padding: 16px; }
+      .opts.three { grid-template-columns: minmax(0, 1fr); }
+      body { padding-bottom: 76px; }
+      .bar {
+        display: flex;
+        position: fixed;
+        left: 0; right: 0; bottom: 0;
+        z-index: 5;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+        background: rgba(10, 13, 16, .92);
+        backdrop-filter: blur(6px);
+        border-top: 1px solid var(--border);
+      }
+      .bar b { font: 900 24px/1 'Big Shoulders Display', sans-serif; white-space: nowrap; }
+      .bar small { color: var(--muted); font-size: 12px; }
+      .bar a { padding: 12px 16px; border-radius: 10px; background: var(--orange); color: #0A0D10; font-weight: 700; text-decoration: none; font-size: 15px; }
     }
 
-    .alt a { color: var(--text); }
-
-    .back {
-      display: block;
-      margin-top: 20px;
-      color: var(--muted);
-      font-size: 14px;
-      text-align: center;
-    }
+    @media (prefers-reduced-motion: reduce) { .clip { transition: none; } }
   </style>
 </head>
 
 <body>
-  <main>
-    <h1>Conte sua <span>ideia</span></h1>
-    <p class="lead">Edição, motion e captação. Conte sobre o projeto e eu respondo com um orçamento.</p>
+  <div class="wrap">
+    <header>
+      <h1>Conte sua <span>ideia</span></h1>
+      <p class="lead">Simule o valor do seu vídeo em menos de um minuto. A estimativa aparece na hora e vai junto com o seu pedido.</p>
+    </header>
 
-    <form id="form" novalidate>
-      <label for="nome">Seu nome</label>
-      <input id="nome" name="nome" autocomplete="name" required />
+    <div class="grid">
+      <section class="panel" aria-label="Opções do vídeo">
+        <div class="step">
+          <h2><b>1</b> Que tipo de vídeo você precisa?</h2>
+          <div class="opts" id="svcs"></div>
+        </div>
+        <div class="step">
+          <h2><b>2</b> <span id="qtyTitle">Quantidade</span></h2>
+          <div class="qty">
+            <input type="range" id="qty" aria-describedby="qtyHint" aria-labelledby="qtyTitle">
+            <output id="qtyOut" for="qty"></output>
+          </div>
+          <p class="hint" id="qtyHint"></p>
+        </div>
+        <div class="step">
+          <h2><b>3</b> Extras</h2>
+          <div class="opts" id="extras"></div>
+        </div>
+        <div class="step">
+          <h2><b>4</b> Para quando?</h2>
+          <div class="opts three" id="prazos"></div>
+        </div>
+      </section>
 
-      <label for="email">Seu email</label>
-      <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required />
+      <aside class="panel result" id="resultado">
+        <div aria-live="polite">
+          <p class="rlabel">Estimativa do projeto</p>
+          <div class="total" id="total"></div>
+          <p class="rlabel" id="totalNote"></p>
+        </div>
+        <div class="tl" aria-hidden="true">
+          <div class="trk"><em>V1</em><div class="lane" id="l1"></div></div>
+          <div class="trk"><em>V2</em><div class="lane" id="l2"></div></div>
+          <div class="trk"><em>A1</em><div class="lane" id="l3"></div></div>
+        </div>
+        <ul class="lines" id="lines"></ul>
+        <p class="fine">Valor estimado. O orçamento final sai depois de uma conversa rápida sobre o material, as referências e o prazo.</p>
 
-      <label for="whatsapp">WhatsApp <span class="opt">(opcional)</span></label>
-      <input id="whatsapp" name="whatsapp" type="tel" autocomplete="tel" inputmode="tel" placeholder="(21) 99999-9999" />
+        <form id="form" novalidate>
+          <h3>Pedir orçamento</h3>
+          <label class="f" for="nome">Seu nome</label>
+          <input class="field" id="nome" name="nome" autocomplete="name" required />
 
-      <label for="tipo">Tipo de vídeo</label>
-      <select id="tipo" name="tipo" required>
-        <option value="">Escolha uma opção</option>
-        <option>Reels / TikTok / Shorts</option>
-        <option>Vídeo para YouTube</option>
-        <option>Cortes de live ou podcast</option>
-        <option>Institucional / publicidade</option>
-        <option>Evento / aftermovie</option>
-        <option>Motion design / animação</option>
-        <option>Videoclipe</option>
-        <option>Documentário / curta</option>
-        <option>Outro</option>
-      </select>
+          <label class="f" for="email">Seu email</label>
+          <input class="field" id="email" name="email" type="email" autocomplete="email" inputmode="email" required />
 
-      <label for="prazo">Prazo <span class="opt">(opcional)</span></label>
-      <input id="prazo" name="prazo" placeholder="Ex.: até 10/12" />
+          <label class="f" for="whatsapp">WhatsApp <span class="opt-t">(opcional)</span></label>
+          <input class="field" id="whatsapp" name="whatsapp" type="tel" autocomplete="tel" inputmode="tel" placeholder="(21) 99999-9999" />
 
-      <label for="mensagem">Conte sobre o projeto</label>
-      <textarea id="mensagem" name="mensagem" required placeholder="Quantos vídeos, duração, referências, se já tem o material gravado..."></textarea>
+          <label class="f" for="mensagem">Conte sobre o projeto <span class="opt-t">(opcional)</span></label>
+          <textarea class="field" id="mensagem" name="mensagem" placeholder="Referências, se já tem o material gravado, data de entrega..."></textarea>
 
-      <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
-      <button class="btn" id="enviar" type="submit">Enviar pedido de orçamento</button>
-      <div class="status" id="status" role="status" aria-live="polite"></div>
-    </form>
+          <button class="btn" id="enviar" type="submit">Enviar pedido com a simulação</button>
+          <div class="status" id="status" role="status" aria-live="polite"></div>
+        </form>
 
-    <div class="done" id="done">
-      <h2>Recebido!</h2>
-      <p>Obrigado pelo contato. Respondo em breve no email ou WhatsApp que você deixou.</p>
+        <div class="done" id="done">
+          <h3>Recebido!</h3>
+          <p>Obrigado pelo contato. Respondo em breve no email ou WhatsApp que você deixou.</p>
+        </div>
+      </aside>
     </div>
 
-    <p class="alt">Prefere escrever direto? <a id="mailto" href="#">Mande um email</a></p>
-    <a class="back" href="../">Ver portfólio</a>
-  </main>
+    <div class="foot">
+      <span>Prefere escrever direto? <a id="mailto" href="#">Mande um email</a></span>
+      <a href="../">Ver portfólio</a>
+    </div>
+  </div>
+
+  <div class="bar"><div><small>Estimativa</small><br><b id="barTotal"></b></div><a href="#form">Pedir orçamento</a></div>
 
   <script>
+  (function () {
+    /* ===== CONFIGURAÇÃO: preços e opções (edite aqui) ===== */
     var ADDR = 'felipedrg02' + '@' + 'gmail.com';
     var ENDPOINT = 'https://formsubmit.co/ajax/' + ADDR;
+    var MARGEM = 0.2; // a faixa mostrada vai do total até total + 20%
 
-    document.getElementById('mailto').href = 'mailto:' + ADDR + '?subject=' + encodeURIComponent('Orçamento de vídeo');
+    // base: valor que já inclui "inc" unidades; por: valor de cada unidade (ou passo) a mais
+    // conta: true quando o preço é por unidade (vídeos, cortes); volume: [[a partir de, desconto]]
+    var SERVICOS = [
+      { id: 'reels', nome: 'Reels / TikTok / Shorts', desc: 'Edição de vídeos verticais', un: 'vídeos', unLong: 'vídeos verticais (até 90 s)', min: 1, max: 30, step: 1, def: 4, base: 0, inc: 0, por: 70, conta: true, volume: [[20, .15], [10, .10]] },
+      { id: 'cortes', nome: 'Cortes de live ou podcast', desc: 'Melhores momentos em 9:16', un: 'cortes', unLong: 'cortes de até 60 s', min: 3, max: 40, step: 1, def: 10, base: 0, inc: 0, por: 35, conta: true, volume: [[30, .15], [15, .10]] },
+      { id: 'yt', nome: 'Vídeo para YouTube', desc: 'Edição com retenção, zooms e SFX', un: 'min', unLong: 'minutos de vídeo final', min: 5, max: 40, step: 1, def: 10, base: 200, inc: 8, por: 15 },
+      { id: 'anuncio', nome: 'Anúncio / comercial', desc: 'Roteiro, imagens, locução e edição', un: 's', unLong: 'segundos de vídeo', min: 15, max: 60, step: 15, def: 30, base: 450, inc: 30, por: 250, passo: 15 },
+      { id: 'motion', nome: 'Motion design', desc: 'Animação, vinheta ou explicativo', un: 's', unLong: 'segundos de animação', min: 15, max: 90, step: 15, def: 30, base: 500, inc: 30, por: 250, passo: 15 },
+      { id: 'evento', nome: 'Evento / aftermovie', desc: 'Captação no Rio + vídeo resumo', un: 'h', unLong: 'horas de cobertura', min: 2, max: 10, step: 1, def: 4, base: 1200, inc: 4, por: 200 },
+      { id: 'inst', nome: 'Institucional', desc: 'Captação no Rio + edição', un: 'min', unLong: 'minutos de vídeo final', min: 1, max: 5, step: 1, def: 2, base: 1800, inc: 1, por: 500 }
+    ];
 
-    var form = document.getElementById('form');
-    var btn = document.getElementById('enviar');
-    var statusEl = document.getElementById('status');
+    var EXTRAS = [
+      { id: 'leg', nome: 'Legenda dinâmica', preco: function (s, q) { return s.conta ? 10 * q : 80; } },
+      { id: 'roteiro', nome: 'Roteiro', preco: function () { return 150; } },
+      { id: 'logo', nome: 'Logo animado', preco: function () { return 250; } },
+      { id: 'color', nome: 'Color grading', preco: function (s, q) { return s.conta ? 10 * q : 150; } },
+      { id: 'thumb', nome: 'Thumbnail', preco: function () { return 50; }, so: function (s) { return s.id === 'yt'; } },
+      { id: 'locucao', nome: 'Locução (voz licenciada)', preco: function () { return 120; }, so: function (s) { return s.id !== 'cortes'; } },
+      { id: 'trilha', nome: 'Trilha licenciada', preco: function () { return 100; } },
+      { id: 'formatos', nome: 'Versões 9:16, 1:1 e 16:9', preco: function () { return 120; }, so: function (s) { return !s.conta; } }
+    ];
 
-    function erro(msg) {
-      statusEl.className = 'status err';
-      statusEl.textContent = msg;
+    var PRAZOS = [
+      { id: 'padrao', nome: 'Padrão', desc: 'até 7 dias úteis', mult: 1 },
+      { id: 'rapido', nome: 'Rápido', desc: '3 dias úteis · +20%', mult: 1.2 },
+      { id: 'urgente', nome: 'Urgente', desc: '24 a 48 horas · +40%', mult: 1.4 }
+    ];
+    /* ===== fim da configuração ===== */
+
+    function $(id) { return document.getElementById(id); }
+    var fmt = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+    function brl(v) { return fmt.format(v); }
+    function r10(v) { return Math.round(v / 10) * 10; }
+    function esc(t) { return String(t).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+
+    var st = { svc: 'reels', q: {}, ex: ['leg'], prazo: 'padrao' };
+    try {
+      var salvo = JSON.parse(localStorage.getItem('orcamento-felipe') || 'null');
+      if (salvo && SERVICOS.some(function (x) { return x.id === salvo.svc; })) st = Object.assign(st, salvo);
+    } catch (e) { }
+    function salvar() { try { localStorage.setItem('orcamento-felipe', JSON.stringify(st)); } catch (e) { } }
+
+    function aPartir(s) { return s.conta ? brl(s.por) + ' / ' + s.un.replace(/s$/, '') : brl(s.base); }
+
+    $('svcs').innerHTML = SERVICOS.map(function (s) {
+      return '<div class="opt"><input type="radio" name="svc" id="svc-' + s.id + '" value="' + s.id + '"><label for="svc-' + s.id + '"><strong>' + esc(s.nome) + '</strong><span>' + esc(s.desc) + '</span><span>a partir de ' + aPartir(s) + '</span></label></div>';
+    }).join('');
+
+    $('prazos').innerHTML = PRAZOS.map(function (p) {
+      return '<div class="opt"><input type="radio" name="prazo" id="pz-' + p.id + '" value="' + p.id + '"><label for="pz-' + p.id + '"><strong>' + esc(p.nome) + '</strong><span>' + esc(p.desc) + '</span></label></div>';
+    }).join('');
+
+    function extrasDe(s) { return EXTRAS.filter(function (e) { return !e.so || e.so(s); }); }
+
+    function calc() {
+      var s = SERVICOS.find(function (x) { return x.id === st.svc; });
+      var q = st.q[s.id] != null ? st.q[s.id] : s.def;
+      var passo = s.passo || 1;
+      var base = s.base + Math.max(0, (q - s.inc) / passo) * s.por;
+      var items = [{ t: 'v1', nome: s.nome + ' · ' + q + ' ' + s.un, v: base }];
+      var vol = (s.volume || []).find(function (v) { return q >= v[0]; });
+      if (vol) items.push({ t: 'v1', nome: 'Desconto por volume (' + Math.round(vol[1] * 100) + '%)', v: -base * vol[1], neg: true });
+      extrasDe(s).filter(function (e) { return st.ex.indexOf(e.id) > -1; }).forEach(function (e) {
+        items.push({ t: 'v2', nome: e.nome, v: e.preco(s, q) });
+      });
+      var sub = items.reduce(function (a, i) { return a + i.v; }, 0);
+      var p = PRAZOS.find(function (x) { return x.id === st.prazo; }) || PRAZOS[0];
+      if (p.mult > 1) items.push({ t: 'a1', nome: 'Prazo ' + p.nome.toLowerCase() + ' (+' + Math.round((p.mult - 1) * 100) + '%)', v: sub * (p.mult - 1) });
+      var total = sub * p.mult;
+      return { s: s, q: q, items: items, total: total, low: r10(total), high: r10(total * (1 + MARGEM)), p: p };
     }
+
+    function resumo(r) {
+      var ex = r.items.filter(function (i) { return i.t === 'v2'; }).map(function (i) { return i.nome; }).join(', ') || 'nenhum';
+      return r.s.nome + ': ' + r.q + ' ' + r.s.unLong + ' | Extras: ' + ex + ' | Prazo: ' + r.p.nome + ' (' + r.p.desc.split(' ·')[0] + ') | Estimativa: ' + brl(r.low) + ' a ' + brl(r.high);
+    }
+
+    function render() {
+      var r = calc(), s = r.s;
+      $('svc-' + s.id).checked = true;
+      $('pz-' + r.p.id).checked = true;
+
+      var R = $('qty');
+      R.min = s.min; R.max = s.max; R.step = s.step; R.value = r.q;
+      R.style.setProperty('--p', ((r.q - s.min) / (s.max - s.min) * 100) + '%');
+      $('qtyTitle').textContent = 'Quantos ' + s.unLong + '?';
+      $('qtyOut').innerHTML = r.q + '<small>' + esc(s.un) + '</small>';
+      var inc = s.inc ? 'Inclui ' + s.inc + ' ' + s.un + '; cada ' + (s.passo ? s.passo + ' ' + s.un : s.un) + ' a mais: +' + brl(s.por) + '.' : brl(s.por) + ' cada.';
+      var vol = s.volume ? ' Desconto a partir de ' + s.volume.slice().reverse().map(function (v) { return v[0] + ' (' + Math.round(v[1] * 100) + '%)'; }).join(' e ') + '.' : '';
+      $('qtyHint').textContent = inc + vol;
+
+      $('extras').innerHTML = extrasDe(s).map(function (e) {
+        return '<div class="opt chk"><input type="checkbox" id="ex-' + e.id + '" value="' + e.id + '"' + (st.ex.indexOf(e.id) > -1 ? ' checked' : '') + '><label for="ex-' + e.id + '"><strong>' + esc(e.nome) + '</strong><span>+ ' + brl(e.preco(s, r.q)) + '</span></label></div>';
+      }).join('');
+
+      $('total').innerHTML = brl(r.low) + ' <span>a</span> ' + brl(r.high);
+      $('barTotal').textContent = 'a partir de ' + brl(r.low);
+      $('totalNote').textContent = s.nome + ', ' + r.q + ' ' + s.unLong + ', prazo ' + r.p.nome.toLowerCase() + '.';
+
+      var pos = r.items.filter(function (i) { return !i.neg; });
+      var net = r.items.find(function (i) { return i.neg; });
+      var span = r.total || 1, x = 0, lanes = { v1: '', v2: '', a1: '' };
+      pos.forEach(function (i, k) {
+        var v = i.v; if (k === 0 && net) v += net.v;
+        var w = v / span * 100;
+        lanes[i.t] += '<div class="clip ' + i.t + '" style="left:' + x + '%;width:calc(' + w + '% - 2px)">' + esc(i.nome.split(' ·')[0]) + '</div>';
+        x += w;
+      });
+      $('l1').innerHTML = lanes.v1; $('l2').innerHTML = lanes.v2; $('l3').innerHTML = lanes.a1;
+
+      $('lines').innerHTML = r.items.map(function (i) {
+        return '<li class="' + (i.neg ? 'neg' : '') + '"><span><i style="background:var(--' + ({ v1: 'orange', v2: 'teal', a1: 'violet' })[i.t] + ')"></i>' + esc(i.nome) + '</span><span>' + (i.neg ? '− ' : '') + brl(Math.abs(i.v)) + '</span></li>';
+      }).join('') + '<li class="sum"><span>Total estimado</span><span>' + brl(r.total) + '</span></li>';
+
+      salvar();
+    }
+
+    $('svcs').addEventListener('change', function (e) { st.svc = e.target.value; render(); });
+    $('prazos').addEventListener('change', function (e) { st.prazo = e.target.value; render(); });
+    $('qty').addEventListener('input', function (e) { st.q[st.svc] = +e.target.value; render(); });
+    $('extras').addEventListener('change', function (e) {
+      var id = e.target.value;
+      st.ex = e.target.checked ? st.ex.concat(st.ex.indexOf(id) > -1 ? [] : [id]) : st.ex.filter(function (x) { return x !== id; });
+      render();
+      var el = $('ex-' + id); if (el) el.focus();
+    });
+
+    render();
+
+    /* ===== envio do pedido ===== */
+    $('mailto').href = 'mailto:' + ADDR + '?subject=' + encodeURIComponent('Orçamento de vídeo');
+
+    var form = $('form'), btn = $('enviar'), statusEl = $('status');
+    function erro(msg) { statusEl.className = 'status err'; statusEl.textContent = msg; }
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var obrig = ['nome', 'email', 'tipo', 'mensagem'];
-      for (var i = 0; i < obrig.length; i++) {
-        var campo = form.elements[obrig[i]];
-        if (!campo.value.trim()) {
-          campo.focus();
-          return erro('Preencha os campos obrigatórios.');
-        }
-      }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.value.trim())) {
-        form.email.focus();
-        return erro('Confira o seu email.');
-      }
-      if (form._honey.value) return; // robô
+      if (!form.nome.value.trim()) { form.nome.focus(); return erro('Preencha o seu nome.'); }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.value.trim())) { form.email.focus(); return erro('Confira o seu email.'); }
+      if (form._honey.value) return;
 
+      var r = calc();
       var dados = {
         nome: form.nome.value.trim(),
         email: form.email.value.trim(),
         whatsapp: form.whatsapp.value.trim() || '-',
-        tipo: form.tipo.value,
-        prazo: form.prazo.value.trim() || '-',
-        mensagem: form.mensagem.value.trim(),
-        _subject: 'Novo orçamento: ' + form.tipo.value + ' (' + form.nome.value.trim() + ')',
+        tipo: r.s.nome,
+        simulacao: resumo(r),
+        mensagem: form.mensagem.value.trim() || '-',
+        _subject: 'Novo orçamento: ' + r.s.nome + ' (' + form.nome.value.trim() + ') ' + brl(r.low) + ' a ' + brl(r.high),
         _replyto: form.email.value.trim(),
         _template: 'table',
         _captcha: 'false'
@@ -260,18 +517,19 @@
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify(dados)
       })
-        .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+        .then(function (res) { return res.json().then(function (j) { return { ok: res.ok, j: j }; }); })
         .then(function (res) {
           if (!res.ok || String(res.j.success) !== 'true') throw new Error(res.j.message || 'falha');
           form.style.display = 'none';
-          document.getElementById('done').style.display = 'block';
+          $('done').style.display = 'block';
         })
         .catch(function () {
           btn.disabled = false;
-          btn.textContent = 'Enviar pedido de orçamento';
+          btn.textContent = 'Enviar pedido com a simulação';
           erro('Não consegui enviar agora. Tente de novo ou mande um email para ' + ADDR + '.');
         });
     });
+  })();
   </script>
 </body>
 
