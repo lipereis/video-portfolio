@@ -47,7 +47,7 @@
     $('c-projetos').textContent = db.projetos.filter(p => ATIVOS.includes(p.status)).length || '';
     $('c-clientes').textContent = db.clientes.length || '';
     $('c-leads').textContent = db.leads.filter(l => ['respondeu', 'negociando'].includes(l.status)).length || '';
-    ({ painel, projetos, clientes, financeiro, prospeccao, calendario })[view]();
+    ({ painel, projetos, clientes, financeiro, prospeccao, planilha, calendario })[view]();
   }
 
   const cab = (titulo, sub, botao) => `<div class="head"><div><h1>${titulo}</h1>${sub ? `<p class="sub">${sub}</p>` : ''}</div>${botao || ''}</div>`;
@@ -162,6 +162,90 @@
     document.querySelectorAll('tr[data-id]').forEach(tr => tr.onclick = () => formLead(db.leads.find(x => x.id === tr.dataset.id)));
   }
 
+  // ---------- planilha de contatos ----------
+  // Uma linha por contato abordado, editável direto na tabela (salva sozinho).
+  const RESPOSTA = { nao: 'Sem resposta', sim: 'Respondeu' };
+  const PROPOSTA = { nao: 'Não enviada', enviada: 'Enviada', aceita: 'Aceita', recusada: 'Recusada' };
+
+  // mantém a etapa da Prospecção coerente com o que foi marcado na planilha
+  function sincronizar(l) {
+    if (l.proposta === 'aceita') l.status = 'fechou';
+    else if (l.proposta === 'recusada') l.status = 'perdido';
+    else if (l.proposta === 'enviada') l.status = 'negociando';
+    else if (l.resposta === 'sim' && l.status === 'enviado') l.status = 'respondeu';
+    else if (l.resposta !== 'sim' && ['respondeu'].includes(l.status)) l.status = 'enviado';
+  }
+  // contatos antigos: deduz as colunas novas a partir da etapa
+  function completar(l) {
+    if (!l.resposta) l.resposta = ['respondeu', 'negociando', 'fechou', 'perdido'].includes(l.status) ? 'sim' : 'nao';
+    if (!l.proposta) l.proposta = l.status === 'fechou' ? 'aceita' : l.status === 'perdido' ? 'recusada' : l.status === 'negociando' ? 'enviada' : 'nao';
+  }
+
+  const filtrosPlan = { q: '', resp: '', prop: '' };
+  function planilha() {
+    db.leads.forEach(completar);
+    const f = filtrosPlan;
+    let lista = db.leads.slice();
+    if (f.resp) lista = lista.filter(l => l.resposta === f.resp);
+    if (f.prop) lista = lista.filter(l => l.proposta === f.prop);
+    if (f.q) lista = lista.filter(l => (l.nome + ' ' + (l.email || '') + ' ' + (l.nicho || '')).toLowerCase().includes(f.q.toLowerCase()));
+    lista.sort((a, b) => (b.enviadoEm || '').localeCompare(a.enviadoEm || '') || a.nome.localeCompare(b.nome));
+    const n = (k, v) => db.leads.filter(l => l[k] === v).length;
+    const total = db.leads.length;
+    const taxa = total ? Math.round(n('resposta', 'sim') / total * 100) : 0;
+    const sel = (campo, mapa, l) => `<select data-k="${campo}" class="${campo === 'resposta' ? 'r-' : 'p-'}${l[campo]}">${Object.entries(mapa).map(([k, v]) => `<option value="${k}" ${l[campo] === k ? 'selected' : ''}>${v}</option>`).join('')}</select>`;
+    const inp = (campo, l, tipo, ph) => `<input data-k="${campo}" type="${tipo || 'text'}" value="${esc(l[campo] || '')}" placeholder="${ph || ''}">`;
+    $('main').innerHTML = cab('Planilha de contatos', 'Cada pessoa que recebeu email ou proposta, e o que aconteceu depois.', '<div style="display:flex;gap:8px"><button class="btn ghost" id="csv">Exportar CSV</button><button class="btn" id="novo">+ Adicionar contato</button></div>') + `
+      <div class="cards">
+        <div class="card"><small>Contatos abordados</small><strong>${total}</strong></div>
+        <div class="card"><small>Responderam</small><strong>${n('resposta', 'sim')} <span class="muted" style="font-size:18px">(${taxa}%)</span></strong></div>
+        <div class="card"><small>Propostas enviadas</small><strong>${n('proposta', 'enviada') + n('proposta', 'aceita') + n('proposta', 'recusada')}</strong></div>
+        <div class="card"><small>Propostas aceitas</small><strong>${n('proposta', 'aceita')}</strong></div>
+      </div>
+      <div class="toolbar">
+        <input id="q" placeholder="Buscar nome, email ou nicho" value="${esc(f.q)}">
+        <select id="fr"><option value="">Resposta: todas</option>${Object.entries(RESPOSTA).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}</select>
+        <select id="fp"><option value="">Proposta: todas</option>${Object.entries(PROPOSTA).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}</select>
+      </div>
+      <p class="legend">Clique em qualquer célula para editar, salva sozinho. Linhas destacadas têm follow-up para hoje ou atrasado.</p>
+      ${lista.length ? `<div class="sheet-wrap"><table class="sheet"><thead><tr><th>Contato</th><th>Nicho</th><th>Canal</th><th>Email enviado</th><th>Resposta</th><th>Respondeu em</th><th>Proposta</th><th>Valor</th><th>Follow-up</th><th>Observações</th></tr></thead><tbody>${lista.map(l => `<tr data-id="${l.id}" class="${l.followUp && l.followUp <= hoje() && !['aceita', 'recusada'].includes(l.proposta) ? 'due' : ''}">
+        <td class="fixed">${esc(l.nome)}<div class="muted" style="font-size:12px">${esc(l.email || '')}</div></td>
+        <td>${inp('nicho', l)}</td>
+        <td>${inp('canal', l)}</td>
+        <td>${inp('enviadoEm', l, 'date')}</td>
+        <td>${sel('resposta', RESPOSTA, l)}</td>
+        <td>${inp('respostaEm', l, 'date')}</td>
+        <td>${sel('proposta', PROPOSTA, l)}</td>
+        <td>${inp('valorProposta', l, 'text', 'R$')}</td>
+        <td>${inp('followUp', l, 'date')}</td>
+        <td><textarea data-k="notas" placeholder="O que ele disse, próximo passo...">${esc(l.notas || '')}</textarea></td>
+      </tr>`).join('')}</tbody></table></div>` : `<p class="empty">${db.leads.length ? 'Nenhum contato com esse filtro.' : 'Nenhum contato ainda. Use "+ Adicionar contato" ou "Importar arquivo" no menu (freela_contatos.json, na pasta vagas/clientes).'}</p>`}`;
+    $('fr').value = f.resp; $('fp').value = f.prop;
+    $('q').oninput = e => { f.q = e.target.value; planilha(); $('q').focus(); $('q').setSelectionRange(f.q.length, f.q.length); };
+    $('fr').onchange = e => { f.resp = e.target.value; planilha(); };
+    $('fp').onchange = e => { f.prop = e.target.value; planilha(); };
+    $('novo').onclick = () => formLead();
+    $('csv').onclick = exportarCSV;
+    document.querySelectorAll('.sheet [data-k]').forEach(el => {
+      el.addEventListener('change', () => {
+        const l = db.leads.find(x => x.id === el.closest('tr').dataset.id);
+        l[el.dataset.k] = el.value;
+        if (el.dataset.k === 'resposta' && el.value === 'sim' && !l.respostaEm) l.respostaEm = hoje();
+        sincronizar(l); salvar();
+        if (el.tagName === 'SELECT') planilha(); else aviso('Salvo.');
+      });
+    });
+  }
+
+  function exportarCSV() {
+    db.leads.forEach(completar);
+    const cols = [['nome', 'Contato'], ['email', 'Email'], ['nicho', 'Nicho'], ['canal', 'Canal'], ['enviadoEm', 'Email enviado'], ['resposta', 'Resposta'], ['respostaEm', 'Respondeu em'], ['proposta', 'Proposta'], ['valorProposta', 'Valor'], ['followUp', 'Follow-up'], ['notas', 'Observações']];
+    const val = (l, k) => k === 'resposta' ? RESPOSTA[l[k]] : k === 'proposta' ? PROPOSTA[l[k]] : (l[k] || '');
+    const csv = [cols.map(c => c[1]), ...db.leads.map(l => cols.map(c => val(l, c[0])))].map(r => r.map(v => '"' + String(v).replace(/"/g, '""') + '"').join(';')).join('\r\n');
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['﻿' + csv], { type: 'text/csv' })); a.download = 'contatos-' + hoje() + '.csv'; a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000); aviso('Planilha exportada para a pasta de downloads.');
+  }
+
   // ---------- calendário ----------
   function calendario() {
     const y = mesCal.getFullYear(), m = mesCal.getMonth();
@@ -265,7 +349,11 @@
       { k: 'status', l: 'Status', t: 'select', opts: Object.entries(STATUS_LEAD), def: 'enviado' },
       { k: 'enviadoEm', l: 'Enviado em', t: 'date', def: hoje() },
       { k: 'notas', l: 'Notas', t: 'area', full: true },
-    ], l || {}, d => { if (l) Object.assign(l, d); else db.leads.push({ id: uid('L'), ...d }); },
+    ], l || {}, d => {
+      // mudou a etapa pelo formulário: recalcula resposta/proposta da planilha
+      if (l) { if (d.status !== l.status) { delete l.resposta; delete l.proposta; } Object.assign(l, d); }
+      else db.leads.push({ id: uid('L'), ...d });
+    },
       l ? () => { db.leads = db.leads.filter(x => x.id !== l.id); } : null);
   }
 

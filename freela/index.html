@@ -113,6 +113,25 @@
     .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--surface-3); border: 1px solid var(--border); padding: 10px 18px; border-radius: 10px; opacity: 0; transition: opacity .2s; pointer-events: none; }
     .toast.show { opacity: 1; }
 
+    .sheet-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; }
+    .sheet { border: 0; border-radius: 0; min-width: 1180px; }
+    .sheet td { padding: 4px 6px; }
+    .sheet td.fixed { padding: 8px 12px; min-width: 190px; }
+    .sheet input, .sheet select, .sheet textarea { width: 100%; background: transparent; border: 1px solid transparent; border-radius: 6px; padding: 6px 8px; font-size: 13px; }
+    .sheet textarea { resize: vertical; min-height: 32px; height: 32px; }
+    .sheet input:hover, .sheet select:hover, .sheet textarea:hover { border-color: var(--border); }
+    .sheet input:focus, .sheet select:focus, .sheet textarea:focus { outline: none; border-color: var(--orange); background: var(--surface-2); }
+    .sheet select option { background: var(--surface); }
+    .sheet select { min-width: 132px; }
+    .sheet input[type=date] { min-width: 138px; }
+    .sheet textarea { min-width: 220px; }
+    .sheet select.r-sim, .sheet select.p-aceita { color: var(--teal); font-weight: 600; }
+    .sheet select.r-nao { color: var(--muted); }
+    .sheet select.p-enviada { color: var(--yellow); font-weight: 600; }
+    .sheet select.p-recusada { color: var(--red); font-weight: 600; }
+    .sheet tr.due td { background: rgba(255,107,61,.07); }
+    .legend { color: var(--muted); font-size: 13px; margin-bottom: 12px; }
+
     @media (max-width: 860px) {
       .app { grid-template-columns: minmax(0,1fr); }
       nav { position: sticky; top: 0; height: auto; flex-direction: row; overflow-x: auto; padding: 10px; z-index: 3; }
@@ -134,6 +153,7 @@
       <button data-v="clientes">Clientes <b id="c-clientes"></b></button>
       <button data-v="financeiro">Financeiro</button>
       <button data-v="prospeccao">Prospecção <b id="c-leads"></b></button>
+      <button data-v="planilha">Planilha de contatos</button>
       <button data-v="calendario">Calendário</button>
       <div class="spacer"></div>
       <button class="small" id="exportar">Salvar backup</button>

@@ -1,5 +1,5 @@
 // Cache simples para o app abrir mesmo sem internet.
-const CACHE = 'freela-v1';
+const CACHE = 'freela-v2';
 const FILES = ['./', './index.html', './app.js','./manifest.json', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', e => {
