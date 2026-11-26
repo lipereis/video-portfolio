@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     pt: {
       aboutTitle: 'Sobre Mim',
       aboutObjective:
-        '<strong>Resumo Profissional:</strong> Profissional com mais de 10 anos de experiência em edição de vídeo, atuando em edição, produção e som direto.',
+        '<strong>Resumo Profissional:</strong> Profissional com mais de 10 anos de experiência em edição de vídeo, atuando também em produção audiovisual e som direto.',
       aboutEducation:
         '<strong>Formação Acadêmica:</strong> Comunicação Social – PUC-Rio, formado em Junho/2024.',
       aboutLanguages:
